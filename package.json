@@ -1,0 +1,23 @@
+{
+  "name": "todomvc-e2e-playwright-test-suite",
+  "version": "1.0.0",
+  "description": "This repository contains a simple, beginner-level end-to-end test suite written with **Playwright** for the classic [TodoMVC application](http://todomvc.com/).",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KA-C42/TodoMVC-E2E-Playwright-Test-Suite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/KA-C42/TodoMVC-E2E-Playwright-Test-Suite/issues"
+  },
+  "homepage": "https://github.com/KA-C42/TodoMVC-E2E-Playwright-Test-Suite#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^24.10.1"
+  }
+}

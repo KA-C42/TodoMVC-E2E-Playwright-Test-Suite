@@ -11,7 +11,7 @@ import { TodoMvcPage } from '../pages/todomvc-page'
 */
 
 
-test.describe('TodoMVC sanity', () => {
+test.describe('TodoMVC App Initialization', () => {
 
     let todoPage: TodoMvcPage
 

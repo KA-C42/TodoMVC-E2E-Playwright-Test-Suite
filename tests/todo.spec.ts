@@ -1,8 +1,9 @@
 import { test, expect } from '@playwright/test'
+import { TodoMvcPage } from '../pages/todomvc-page'
 
 /* Note!
 
-    The following is a preliminary skeleton of planned tests, and is subject to change. 
+    The following is mostly an early skeleton of planned tests, and is subject to change. 
 
     First-level indents signify individual tests
     Second-level indents and beyond signify expected, less-implied behaviors during each test
@@ -12,15 +13,28 @@ import { test, expect } from '@playwright/test'
 
 test.describe('TodoMVC sanity', () => {
 
-    // renders home page
+    let todoPage: TodoMvcPage
 
-        // initial task list empty
+    test.beforeEach( async ({ page }) => {
+        todoPage = new TodoMvcPage(page)
+        
+        // go to starting URL before each test
+        await todoPage.goto()
+    } )
 
-        // "toggle all" button invisible
+    test( 'renders empty state home page', async () => {
 
-        // "clear completed" button invisible
+        await expect(todoPage.page).toHaveURL(/\/todomvc\/#\//)
 
-        // active count == 0
+        // main UI rendered
+        await expect(todoPage.todoHeader).toBeVisible()
+        await expect(todoPage.newTodo).toBeEditable()
+
+        // empty state: no todos, no toggle-all checkbox, no footer
+       await expect(todoPage.todoItems).toHaveCount(0)
+       await expect(todoPage.toggleAllButton).toHaveCount(0)
+       await expect(todoPage.todoFooter).toHaveCount(0)
+    })
 
     // data persists on refresh
 

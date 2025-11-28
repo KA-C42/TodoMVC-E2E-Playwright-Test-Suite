@@ -12,6 +12,7 @@ export class TodoMvcPage {
     readonly todoItems: Locator
     readonly toggleAllButton: Locator
     readonly todoFooter: Locator
+    readonly todoCount: Locator
 
     constructor(page: Page) {
         this.page = page
@@ -22,9 +23,15 @@ export class TodoMvcPage {
         this.todoItems = this.todoList.getByRole('listitem')
         this.toggleAllButton = page.getByRole('checkbox', { name: 'Mark all as complete'})
         this.todoFooter = this.todoApp.locator('.footer')
+        this.todoCount = this.todoFooter.getByTestId('todo-count')
     }
 
     async goto(){
         await this.page.goto('/todomvc/#/')
+    }
+
+    async addTodo(todo: string) {
+        await this.newTodo.fill(todo)
+        await this.newTodo.press('Enter')
     }
 }

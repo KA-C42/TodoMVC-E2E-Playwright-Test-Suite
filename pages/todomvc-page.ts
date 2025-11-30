@@ -44,7 +44,8 @@ export class TodoMvcPage {
 
         return {
             root: todo,
-            checkbox: todo.getByRole('checkbox')
+            checkbox: todo.getByRole('checkbox'),
+            deleteButton: todo.getByLabel(/Delete/)
         }
     }
 }

@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test'
 import { TodoMvcPage } from '../pages/todomvc-page'
+import expectEmptyState from '../utils/commonUtils'
 
 /* Note!
 
@@ -33,9 +34,7 @@ test.describe('TodoMVC App Initialization', () => {
         await expect(todoPage.newTodo).toBeEditable()
 
         // empty state: no todos, no toggle-all checkbox, no footer
-        await expect(todoPage.todoItems).toHaveCount(0)
-        await expect(todoPage.toggleAllButton).toHaveCount(0)
-        await expect(todoPage.todoFooter).toHaveCount(0)
+        await expectEmptyState(todoPage)
     })
 
     // data persists on refresh
@@ -128,17 +127,20 @@ test.describe('Single item actions', () => {
 
         // "toggle all" button unchecked
 
-    // deletes a todo
+    test('delete only todo, return to empty-list state', async () => {
+        // SETUP
+        const todo = 'fight me >:('
+        await todoPage.addTodo(todo)
+        const toDelete = todoPage.getTodoItem(todo)
 
-        // hover to see delete button
+        // ASSERTIONS
+        await expect(toDelete.deleteButton).not.toBeVisible()
+        await toDelete.root.hover()
+        await expect(toDelete.deleteButton).toBeVisible()
 
-        // removes selected todo
-
-        // active count accurately updates
-
-        // "clear completed" button invisible if 0 tasks complete
-
-        // "toggle all" visible if tasks
+        await toDelete.deleteButton.click()
+        await expectEmptyState(todoPage)
+    })
 
     // double click to edit a todo
 

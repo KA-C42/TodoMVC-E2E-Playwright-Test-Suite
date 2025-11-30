@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test'
 import { TodoMvcPage } from '../pages/todomvc-page'
+import expectEmptyState from '../utils/commonUtils'
 
 /* Note!
 
@@ -33,9 +34,7 @@ test.describe('TodoMVC App Initialization', () => {
         await expect(todoPage.newTodo).toBeEditable()
 
         // empty state: no todos, no toggle-all checkbox, no footer
-        await expect(todoPage.todoItems).toHaveCount(0)
-        await expect(todoPage.toggleAllButton).toHaveCount(0)
-        await expect(todoPage.todoFooter).toHaveCount(0)
+        await expectEmptyState(todoPage)
     })
 
     // data persists on refresh

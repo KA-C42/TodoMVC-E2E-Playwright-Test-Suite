@@ -8,6 +8,8 @@ import { TodoMvcPage } from '../pages/todomvc-page'
     First-level indents signify individual tests
     Second-level indents and beyond signify expected, less-implied behaviors during each test
 
+    Later comments are tests yet to be planned out
+
 */
 
 
@@ -58,9 +60,11 @@ test.describe('Single item actions', () => {
 
     test('adds todo from empty state', async () => {
 
+        // SETUP
         const todo = 'write a test'
         await todoPage.addTodo(todo)
 
+        // ASSERTIONS
         // adding todo clears input
         await expect(todoPage.newTodo).toHaveValue('')
 
@@ -76,17 +80,27 @@ test.describe('Single item actions', () => {
 
     })
 
-    // adds a todo
+    test('marks only todo as complete', async () => {
 
-        // does not add empty tasks 
+        // SETUP
+        const todoName = 'check this!'
+        await todoPage.addTodo(todoName)
 
-        // adding a todo clears input
+        const todoItem = todoPage.getTodoItem(todoName)
+        
+        await todoItem.checkbox.click()
 
-        // task added, unchecked
+        // ASSERTIONS
+        // visual behavior covered by 'completed' class, tested separately
+        await expect(todoItem.root).toHaveClass(/completed/)        
+        await expect(todoItem.checkbox).toBeChecked()
 
-        // active count accurately updates
+        await expect(todoPage.toggleAllButton).toBeChecked()        // toggle-all button toggles
+        await expect(todoPage.todoCount).toHaveText('0 items left') // active count updates
+        await expect(todoPage.clearCompletedButton).toBeVisible()   // clear completed visible
+    })
 
-        // "toggle all" button visible and unchecked
+    // test('completed todo is visually distinct', async () => {})
 
     // marks a todo as complete 
     

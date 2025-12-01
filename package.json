@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "This repository contains a simple, beginner-level end-to-end test suite written with **Playwright** for the classic [TodoMVC application](http://todomvc.com/).",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "format": "prettier --write \"**/*.ts\"",
+    "format:check": "prettier --check \"**/*.ts\""
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KA-C42/TodoMVC-E2E-Playwright-Test-Suite.git"
@@ -18,6 +21,7 @@
   "homepage": "https://github.com/KA-C42/TodoMVC-E2E-Playwright-Test-Suite#readme",
   "devDependencies": {
     "@playwright/test": "^1.57.0",
-    "@types/node": "^24.10.1"
+    "@types/node": "^24.10.1",
+    "prettier": "3.7.3"
   }
 }

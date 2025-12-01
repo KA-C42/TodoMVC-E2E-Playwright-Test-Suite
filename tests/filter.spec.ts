@@ -1,15 +1,13 @@
-import { test, expect } from "@playwright/test"
-import { TodoMvcPage } from "./pages/todomvc-page"
-
+import { test, expect } from '@playwright/test'
+import { TodoMvcPage } from './pages/todomvc-page'
 
 test.describe('TodoMVC - Filtering', () => {
+  let todoPage: TodoMvcPage
 
-    let todoPage: TodoMvcPage
+  test.beforeEach(async ({ page }) => {
+    todoPage = new TodoMvcPage(page)
 
-    test.beforeEach( async ({ page }) => {
-        todoPage = new TodoMvcPage(page)
-        
-        // go to starting URL before each test
-        await todoPage.goto()
-    } )
+    // go to starting URL before each test
+    await todoPage.goto()
+  })
 })

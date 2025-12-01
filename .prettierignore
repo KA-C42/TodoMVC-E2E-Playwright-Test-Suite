@@ -1,0 +1,13 @@
+# Dependencies & build artifacts
+node_modules
+build
+dist
+coverage
+playwright-report
+test-results
+
+# Non-code content, no prettier!
+README.md
+*.md
+*.yml
+*.yaml

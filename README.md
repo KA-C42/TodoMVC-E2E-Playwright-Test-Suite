@@ -1,4 +1,7 @@
 # TodoMVC-E2E-Playwright-Test-Suite
+[![Playwright Tests](https://github.com/KA-C42/TodoMVC-E2E-Playwright-Test-Suite/actions/workflows/playwright.yml/badge.svg)](https://github.com/KA-C42/TodoMVC-E2E-Playwright-Test-Suite/actions/workflows/playwright.yml)
+[![Prettier Formatting Check](https://github.com/KA-C42/TodoMVC-E2E-Playwright-Test-Suite/actions/workflows/prettier.yml/badge.svg)](https://github.com/KA-C42/TodoMVC-E2E-Playwright-Test-Suite/actions/workflows/prettier.yml)
+
 This repository contains a simple, beginner-level end-to-end test suite written with **Playwright** for the classic [TodoMVC application](http://todomvc.com/).
 
 ## Motivation

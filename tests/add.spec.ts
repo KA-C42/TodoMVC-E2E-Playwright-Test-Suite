@@ -43,6 +43,7 @@ test.describe('TodoMVC - Adding todos', () => {
     const todoNameA2 = 'test A2: add todo from populated varied list'
     await todoPage.addTodo(todoNameA2)
     const activeAfter = await todoPage.getActiveCount()
+    expect(activeAfter).toBeGreaterThan(0)
 
     // ASSERTIONS
     await expect(todoPage.toggleAllButton).not.toBeChecked() // checking for comparison with test A3

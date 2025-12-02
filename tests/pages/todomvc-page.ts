@@ -53,8 +53,13 @@ export class TodoMvcPage {
   }
 
   async addAndCompleteTodo(todoName: string) {
+    // duplicateCount to ensure correct duplicate is completed
+    const duplicateCount = await this.todoItems
+      .filter({ hasText: todoName })
+      .count()
+
     await this.addTodo(todoName)
-    const toComplete = this.getTodoItem(todoName)
+    const toComplete = this.getTodoItem(todoName, duplicateCount)
     await toComplete.checkbox.check()
   }
 

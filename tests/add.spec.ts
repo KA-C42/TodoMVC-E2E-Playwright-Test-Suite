@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 import { TodoMvcPage } from './pages/todomvc-page'
-import populateVaried from './utils/seederHelpers'
+import { populateVaried, populateCompleted } from './utils/seederHelpers'
 
 test.describe('TodoMVC - Adding todos', () => {
   let todoPage: TodoMvcPage
@@ -48,5 +48,23 @@ test.describe('TodoMVC - Adding todos', () => {
     await expect(todoPage.toggleAllButton).not.toBeChecked() // checking for comparison with test A3
     expect(activeAfter).toBe(activeBefore + 1)
     await expect(todoPage.getTodoItem(todoNameA2).root).toBeVisible()
+  })
+
+  // A3
+  test('adds todo to a fully completed list', async () => {
+    // SETUP
+    await populateCompleted(todoPage)
+    await expect(todoPage.toggleAllButton).toBeChecked()
+    const activeBefore = await todoPage.getActiveCount()
+    expect(activeBefore).toBe(0)
+
+    const todoNameA3 = 'test A3: add todo from populated completed list'
+    await todoPage.addTodo(todoNameA3)
+    const activeAfter = await todoPage.getActiveCount()
+
+    // ASSERTIONS
+    await expect(todoPage.toggleAllButton).not.toBeChecked()
+    expect(activeAfter).toBe(activeBefore + 1)
+    await expect(todoPage.getTodoItem(todoNameA3).root).toBeVisible()
   })
 })

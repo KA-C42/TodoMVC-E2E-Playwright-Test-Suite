@@ -11,7 +11,7 @@ This document details the planned tests and testing structure. The document will
 
 [x] **A2:** Add todo from populated-varied state (toggle-all remains unchecked)
 
-[ ] **A3:** Add todo from populated-completed state (toggle-all becomes unchecked)
+[x] **A3:** Add todo from populated-completed state (toggle-all becomes unchecked)
 
 [ ] **A4:** Allow duplicate todos
 

@@ -63,4 +63,34 @@ test.describe('TodoMVC - Deleting todos', () => {
     await expect(item.root).toHaveCount(0)
     expect(activeAfter).toBe(activeBefore - 1)
   })
+
+  // D4
+  test('delete chosen duplicate', async () => {
+    // Specify chosen duplicate in case of feature expansion attaching meta data to todo
+    // Order-sensitive setup instead of a seeder for clarity and visibility
+    // SETUP
+    const toKeepDoing = 'floop the pig'
+    await todoPage.addTodo(toKeepDoing)
+    await todoPage.addTodo(toKeepDoing)
+    await todoPage.addAndCompleteTodo(toKeepDoing)
+    await todoPage.addTodo(toKeepDoing)
+
+    // delete the second item, active duplicate
+    const toDelete = todoPage.getTodoItem(toKeepDoing, 1)
+    await toDelete.root.hover()
+    await toDelete.deleteButton.click()
+
+    // ASSERTIONS
+    const duplicateCount = await todoPage.todoItems
+      .filter({ hasText: toKeepDoing })
+      .count()
+    expect(duplicateCount).toBe(3) // confirm 3 todos exist with same name
+
+    const activeCount = await todoPage.getActiveCount()
+    expect(activeCount).toBe(2) // confirm 2 of the duplicates still marked incomplete
+
+    await expect(todoPage.getTodoItem(toKeepDoing, 1).root).toHaveClass(
+      'completed',
+    ) // confirm middle todo is the one still "complete"
+  })
 })

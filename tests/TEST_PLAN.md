@@ -26,7 +26,7 @@ This document details the planned tests and testing structure. The document will
 
 [x] **D3:** Delete one of many active todos
 
-[ ] **D4:** Delete single chosen instance of duplicate todo
+[x] **D4:** Delete single chosen instance of duplicate todo
 
 [ ] **D5:** Delete only todo from filtered view
 

@@ -11,3 +11,9 @@ export async function populateCompleted(todoPage: TodoMvcPage) {
   await todoPage.addAndCompleteTodo('build a crafting table')
   await todoPage.addAndCompleteTodo('craft a pickaxe')
 }
+
+export async function populateActive(todoPage: TodoMvcPage) {
+  await todoPage.addTodo('Current Objective: Survive')
+  await todoPage.addTodo('Find Timmy')
+  await todoPage.addTodo('Save Ellie')
+}

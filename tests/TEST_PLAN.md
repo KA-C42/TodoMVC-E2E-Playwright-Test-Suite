@@ -22,9 +22,9 @@ This document details the planned tests and testing structure. The document will
 ### Deleting todos
 [x] **D1:** Delete only todo, returns to empty state
 
-[ ] **D2:** Delete only completed todo from populated-varied state
+[x] **D2:** Delete only completed todo from populated-varied state
 
-[ ] **D3:** Delete one of many active todos
+[x] **D3:** Delete one of many active todos
 
 [ ] **D4:** Delete single chosen instance of duplicate todo
 

@@ -13,7 +13,7 @@ This document details the planned tests and testing structure. The document will
 
 [x] **A3:** Add todo from populated-completed state (toggle-all becomes unchecked)
 
-[ ] **A4:** Allow duplicate todos
+[x] **A4:** Allow duplicate todos
 
 [ ] **A5:** Do not add empty/whitespace todo
 

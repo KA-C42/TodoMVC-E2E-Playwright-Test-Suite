@@ -68,4 +68,21 @@ test.describe('TodoMVC - Adding todos', () => {
     expect(activeAfter).toBe(activeBefore + 1)
     await expect(todoPage.getTodoItem(todoNameA3).root).toBeVisible()
   })
+
+  // A4
+  test('allow duplicate todos and maintain correct completion per item', async () => {
+    // SETUP
+    const toDupe = 'cast eldritch blast'
+    await todoPage.addTodo(toDupe)
+    await todoPage.addAndCompleteTodo(toDupe) // comparing both active and completed for edge cases
+    await todoPage.addTodo(toDupe)
+    const activeCount = await todoPage.getActiveCount()
+
+    const duplicateCount = await todoPage.todoItems
+      .filter({ hasText: toDupe })
+      .count()
+    expect(duplicateCount).toBe(3) // confirm 3 todos exist with same name
+    expect(activeCount).toBe(2) // confirm 2 of the duplicates still marked incomplete
+    await expect(todoPage.getTodoItem(toDupe, 1).checkbox).toBeChecked() // confirm middle todo is the one still "complete"
+  })
 })

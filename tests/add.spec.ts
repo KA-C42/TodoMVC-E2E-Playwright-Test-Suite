@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { TodoMvcPage } from './pages/todomvc-page'
 import { populateVaried, populateCompleted } from './utils/seederHelpers'
+import expectEmptyState from './utils/assertionHelpers'
 
 test.describe('TodoMVC - Adding todos', () => {
   let todoPage: TodoMvcPage
@@ -84,5 +85,30 @@ test.describe('TodoMVC - Adding todos', () => {
     expect(duplicateCount).toBe(3) // confirm 3 todos exist with same name
     expect(activeCount).toBe(2) // confirm 2 of the duplicates still marked incomplete
     await expect(todoPage.getTodoItem(toDupe, 1).checkbox).toBeChecked() // confirm middle todo is the one still "complete"
+  })
+
+  // A6
+  test('do not add an empty or whitespace todo', async () => {
+    // SETUP
+    await expectEmptyState(todoPage)
+    await todoPage.addTodo('')
+    await todoPage.addTodo('    ')
+
+    // ASSERTIONS
+    await expect(todoPage.todoItems).toHaveCount(0)
+    await expect(todoPage.toggleAllButton).toHaveCount(0)
+    await expect(todoPage.todoFooter).toHaveCount(0)
+  })
+
+  // A7
+  test('trim surrounding whitespace before adding todo', async () => {
+    // SETUP
+    await expectEmptyState(todoPage)
+    const toSee = '-. . .-. -..' // additionally verifies internal whitespace left intact
+    const fullEntry = '     ' + toSee + '     '
+    await todoPage.addTodo(fullEntry)
+
+    // ASSERTIONS
+    await expect(todoPage.todoItems.nth(0)).toHaveText(RegExp(toSee))
   })
 })

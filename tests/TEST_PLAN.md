@@ -15,9 +15,9 @@ This document details the planned tests and testing structure. The document will
 
 [x] **A4:** Allow duplicate todos
 
-[ ] **A5:** Do not add empty/whitespace todo
+[x] **A5:** Do not add empty/whitespace todo
 
-[ ] **A6:** Trim surrounding whitespace from added todo
+[x] **A6:** Trim surrounding whitespace from added todo
 
 ### Deleting todos
 [x] **D1:** Delete only todo, returns to empty state

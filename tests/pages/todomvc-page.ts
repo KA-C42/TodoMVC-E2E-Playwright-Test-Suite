@@ -51,4 +51,15 @@ export class TodoMvcPage {
       deleteButton: todo.getByLabel(/Delete/),
     }
   }
+
+  async addAndCompleteTodo(todoName: string) {
+    await this.addTodo(todoName)
+    const toComplete = this.getTodoItem(todoName)
+    await toComplete.checkbox.check()
+  }
+
+  async getActiveCount(): Promise<number> {
+    const count = Number(await this.todoCount.locator('strong').textContent())
+    return count
+  }
 }

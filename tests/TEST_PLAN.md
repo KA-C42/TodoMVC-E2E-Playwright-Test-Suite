@@ -41,6 +41,8 @@ This document details the planned tests and testing structure. The document will
 
 [ ] **M5:** Mark only complete todo as incomplete from populated-varied state
 
+[ ] **M6:** Trim surrounding whitespace from edited todo
+
 
 ## Bulk actions
 [ ] **B1:** Toggle all complete from populated-incomplete state

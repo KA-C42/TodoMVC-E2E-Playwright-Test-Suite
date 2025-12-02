@@ -9,7 +9,7 @@ This document details the planned tests and testing structure. The document will
 ### Adding todos
 [x] **A1:** Add todo from empty state
 
-[ ] **A2:** Add todo from populated-varied state (toggle-all remains unchecked)
+[x] **A2:** Add todo from populated-varied state (toggle-all remains unchecked)
 
 [ ] **A3:** Add todo from populated-completed state (toggle-all becomes unchecked)
 

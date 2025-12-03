@@ -57,8 +57,8 @@ This document details the planned tests and testing structure. The document will
 
 
 ## Filtering
-[ ] **F1:** Show incomplete/active only
+[x] **F1:** Show incomplete/active only
 
-[ ] **F2:** Show completed only
+[x] **F2:** Show completed only
 
-[ ] **F3:** Reset filter to show all from filtered view
+[x] **F3:** Reset filter to show all from filtered view

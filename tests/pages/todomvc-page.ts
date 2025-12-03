@@ -13,6 +13,10 @@ export class TodoMvcPage {
   readonly todoFooter: Locator
   readonly todoCount: Locator
   readonly clearCompletedButton: Locator
+  readonly filters: Locator
+  readonly activeFilter: Locator
+  readonly completedFilter: Locator
+  readonly allFilter: Locator
 
   constructor(page: Page) {
     this.page = page
@@ -29,6 +33,10 @@ export class TodoMvcPage {
     this.clearCompletedButton = this.todoFooter.getByRole('button', {
       name: 'Clear completed',
     })
+    this.filters = this.todoFooter.getByRole('list')
+    this.activeFilter = this.filters.getByRole('link', { name: 'Active' })
+    this.completedFilter = this.filters.getByRole('link', { name: 'Completed' })
+    this.allFilter = this.filters.getByRole('link', { name: 'All' })
   }
 
   async goto() {

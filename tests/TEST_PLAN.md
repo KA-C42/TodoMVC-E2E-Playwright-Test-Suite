@@ -31,7 +31,7 @@ This document details the planned tests and testing structure. The document will
 [ ] **D5:** Delete only todo from filtered view
 
 ### Modifying todos
-[ ] **M1:** Edit chosen todo does not change completed status or other todos
+[x] **M1:** Edit chosen todo does not change completed status or other todos
 
 [x] **M2:** Mark only todo as complete
 

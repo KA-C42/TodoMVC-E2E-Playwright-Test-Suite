@@ -108,7 +108,10 @@ test.describe('TodoMVC - Adding todos', () => {
     const fullEntry = '     ' + toSee + '     '
     await todoPage.addTodo(fullEntry)
 
+    const raw = await todoPage.getTodoItem(toSee).root.textContent()
+
     // ASSERTIONS
-    await expect(todoPage.todoItems.nth(0)).toHaveText(RegExp(toSee))
+    expect(raw).toBe(toSee)
+    expect(raw).not.toBe(fullEntry)
   })
 })

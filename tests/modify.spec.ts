@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test'
 import { TodoMvcPage } from './pages/todomvc-page'
+import { throwDeprecation } from 'process'
 
 test.describe('TodoMVC - Modifying todos', () => {
   let todoPage: TodoMvcPage
@@ -68,6 +69,74 @@ test.describe('TodoMVC - Modifying todos', () => {
     await expect(todoPage.toggleAllButton).toBeChecked() // toggle-all button toggles
     await expect(todoPage.todoCount).toHaveText('0 items left') // active count updates
     await expect(todoPage.clearCompletedButton).toBeVisible() // clear completed visible
+  })
+
+  // M3
+  test('marks only todo as incomplete', async () => {
+    // SETUP
+    const todoName = 'toggle me'
+    await todoPage.addAndCompleteTodo(todoName)
+    await expect(todoPage.todoItems).toHaveCount(1)
+
+    const todo = todoPage.getTodoItem(todoName)
+    await expect(todo.root).toBeVisible()
+
+    await expect(todo.root).toHaveClass('completed')
+    await expect(todoPage.toggleAllButton).toBeChecked()
+    await expect(todoPage.clearCompletedButton).toBeVisible()
+    const oldActiveCount = await todoPage.getActiveCount()
+    expect(oldActiveCount).toBe(0)
+
+    await todo.checkbox.click()
+
+    // ASSERTIONS
+    await expect(todo.root).not.toHaveClass('completed')
+    await expect(todoPage.toggleAllButton).not.toBeChecked()
+    await expect(todoPage.clearCompletedButton).not.toBeVisible()
+    const newActiveCount = await todoPage.getActiveCount()
+    expect(newActiveCount).toBe(1)
+  })
+
+  // M4
+  test('complete last active todo from populated state', async () => {
+    // SETUP
+    const completeFiller = 'all done!'
+    await todoPage.addAndCompleteTodo(completeFiller)
+    await todoPage.addAndCompleteTodo(completeFiller)
+    const todoText = 'almost done!'
+    await todoPage.addTodo(todoText)
+
+    await expect(todoPage.todoItems).toHaveCount(3)
+    await expect(todoPage.toggleAllButton).not.toBeChecked()
+
+    const todo = todoPage.getTodoItem(todoText)
+    await expect(todo.root).not.toHaveClass('completed')
+    await todo.checkbox.click()
+
+    // ASSERTIONS
+    await expect(todo.root).toHaveClass('completed')
+    await expect(todoPage.toggleAllButton).toBeChecked()
+  })
+
+  // M5
+  test('mark only complete todo as active from populated state', async () => {
+    // SETUP
+    const activeFiller = 'procrastinate'
+    await todoPage.addTodo(activeFiller)
+    await todoPage.addTodo(activeFiller)
+    const toUndoText = 'do it again'
+    await todoPage.addAndCompleteTodo(toUndoText)
+
+    await expect(todoPage.todoItems).toHaveCount(3)
+    await expect(todoPage.clearCompletedButton).toBeVisible()
+
+    const toUndo = todoPage.getTodoItem(toUndoText)
+    await expect(toUndo.root).toHaveClass('completed')
+    await toUndo.checkbox.click()
+
+    // ASSERTIONS
+    await expect(toUndo.root).not.toHaveClass('completed')
+    await expect(todoPage.clearCompletedButton).not.toBeVisible()
   })
 
   // M6

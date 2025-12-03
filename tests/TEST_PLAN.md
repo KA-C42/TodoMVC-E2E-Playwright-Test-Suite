@@ -45,11 +45,11 @@ This document details the planned tests and testing structure. The document will
 
 
 ## Bulk actions
-[ ] **B1:** Toggle all complete from populated-incomplete state
+[x] **B1:** Toggle all complete from populated-incomplete state
 
-[ ] **B2:** Toggle all complete from populated-varied state
+[x] **B2:** Toggle all complete from populated-varied state
 
-[ ] **B3:** Toggle all incomplete from populated-complete state
+[x] **B3:** Toggle all incomplete from populated-complete state
 
 [ ] **B4:** Clear completed from populated-varied state
 

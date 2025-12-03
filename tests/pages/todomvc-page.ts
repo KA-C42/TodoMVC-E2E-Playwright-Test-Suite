@@ -87,4 +87,9 @@ export class TodoMvcPage {
     const count = Number(await this.todoCount.locator('strong').textContent())
     return count
   }
+
+  async getCompletedCount(): Promise<number> {
+    const completedCount = await this.todoList.locator('.completed').count()
+    return completedCount
+  }
 }

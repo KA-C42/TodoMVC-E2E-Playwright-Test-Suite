@@ -35,11 +35,11 @@ This document details the planned tests and testing structure. The document will
 
 [x] **M2:** Mark only todo as complete
 
-[ ] **M3:** Mark only todo as incomplete
+[x] **M3:** Mark only todo as incomplete
 
-[ ] **M4:** Mark only incomplete todo as complete from populated-varied state
+[x] **M4:** Mark only incomplete todo as complete from populated-varied state
 
-[ ] **M5:** Mark only complete todo as incomplete from populated-varied state
+[x] **M5:** Mark only complete todo as incomplete from populated-varied state
 
 [x] **M6:** Trim surrounding whitespace from edited todo
 

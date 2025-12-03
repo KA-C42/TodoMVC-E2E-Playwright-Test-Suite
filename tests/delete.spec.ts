@@ -89,4 +89,20 @@ test.describe('TodoMVC - Deleting todos', () => {
       'completed',
     ) // confirm middle todo is the one still "complete"
   })
+
+  // D5
+  test('delete only todo from filtered view', async () => {
+    // SETUP
+    const toDelete = 'now you see me'
+    await todoPage.addAndCompleteTodo(toDelete)
+
+    await todoPage.completedFilter.click()
+    await expect(todoPage.page).toHaveURL(/\/todomvc\/#\/completed/)
+    await expect(todoPage.todoItems).toHaveCount(1)
+
+    await todoPage.deleteTodo(toDelete)
+
+    await expect(todoPage.page).toHaveURL(/\/todomvc\/#\/completed/)
+    await expectEmptyState(todoPage)
+  })
 })

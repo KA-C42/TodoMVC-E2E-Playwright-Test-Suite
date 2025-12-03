@@ -57,6 +57,11 @@ export class TodoMvcPage {
       root: todo,
       checkbox: todo.getByRole('checkbox'),
       deleteButton: todo.getByLabel(/Delete/),
+      edit: async (newText: string) => {
+        todo.dblclick()
+        todo.getByRole('textbox', { name: 'Edit' }).fill(newText)
+        todo.getByRole('textbox', { name: 'Edit' }).press('Enter')
+      },
     }
   }
 

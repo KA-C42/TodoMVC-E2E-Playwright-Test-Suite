@@ -69,4 +69,22 @@ test.describe('TodoMVC - Modifying todos', () => {
     await expect(todoPage.todoCount).toHaveText('0 items left') // active count updates
     await expect(todoPage.clearCompletedButton).toBeVisible() // clear completed visible
   })
+
+  // M6
+  test('trim surrounding whitespace from edited todo', async () => {
+    // SETUP
+    const oldText = 'schwoopsie'
+    const newText = 'clear whitespace'
+    const editText = '     ' + newText + '     '
+    await todoPage.addTodo(oldText)
+    const toEdit = todoPage.getTodoItem(oldText)
+
+    await toEdit.edit(editText)
+    const raw = await todoPage.getTodoItem(newText).root.textContent()
+
+    // ASSERTIONS
+    expect(raw).toBe(newText)
+    expect(raw).not.toBe(editText)
+    await expect(todoPage.todoItems.filter({ hasText: oldText })).toHaveCount(0)
+  })
 })

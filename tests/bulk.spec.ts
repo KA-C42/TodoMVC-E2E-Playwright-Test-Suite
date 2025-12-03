@@ -99,4 +99,55 @@ test.describe('TodoMVC - Bulk item actions', () => {
     await expect(todoPage.toggleAllButton).not.toBeChecked()
     await expect(todoPage.clearCompletedButton).not.toBeVisible()
   })
+
+  // B4
+  test('clear completed from populated-varied list', async () => {
+    // SETUP
+    await populateVaried(todoPage)
+
+    const startingActive = await todoPage.getActiveCount()
+    const startingCompleted = await todoPage.getCompletedCount()
+    const startingTotal = await todoPage.todoItems.count()
+    expect(startingCompleted + startingActive).toBe(startingTotal)
+    expect(startingActive).toBeGreaterThan(0)
+    expect(startingCompleted).toBeGreaterThan(0)
+
+    await expect(todoPage.clearCompletedButton).toBeVisible()
+    await expect(todoPage.todoFooter).toBeVisible()
+
+    await todoPage.clearCompletedButton.click()
+
+    // ASSERTIONS
+    const endingActive = await todoPage.getActiveCount()
+    const endingCompleted = await todoPage.getCompletedCount()
+    const endingTotal = await todoPage.todoItems.count()
+    expect(endingTotal).toBe(startingTotal - startingCompleted)
+    expect(endingActive).toBe(endingTotal)
+    expect(endingCompleted).toBe(0)
+
+    await expect(todoPage.clearCompletedButton).not.toBeVisible()
+    await expect(todoPage.todoFooter).toBeVisible()
+    await expect(todoPage.toggleAllButton).toBeVisible()
+  })
+
+  // B5
+  test('clear completed from populated-completed list', async () => {
+    // SETUP
+    await populateCompleted(todoPage)
+
+    const startingActive = await todoPage.getActiveCount()
+    const startingCompleted = await todoPage.getCompletedCount()
+    const startingTotal = await todoPage.todoItems.count()
+    expect(startingCompleted).toBe(startingTotal)
+    expect(startingActive).toBe(0)
+
+    await expect(todoPage.clearCompletedButton).toBeVisible()
+    await expect(todoPage.toggleAllButton).toBeChecked()
+    await expect(todoPage.todoFooter).toBeVisible()
+
+    await todoPage.clearCompletedButton.click()
+
+    // ASSERTIONS
+    await expectEmptyState(todoPage)
+  })
 })

@@ -76,6 +76,13 @@ export class TodoMvcPage {
     await toComplete.checkbox.check()
   }
 
+  async deleteTodo(todoName: string, nth: number = 0) {
+    const toDelete = this.getTodoItem(todoName, nth)
+
+    await toDelete.root.hover()
+    await toDelete.deleteButton.click()
+  }
+
   async getActiveCount(): Promise<number> {
     const count = Number(await this.todoCount.locator('strong').textContent())
     return count

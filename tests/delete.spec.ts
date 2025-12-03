@@ -38,8 +38,7 @@ test.describe('TodoMVC - Deleting todos', () => {
     await expect(todoPage.clearCompletedButton).toBeVisible()
 
     const item = todoPage.getTodoItem(toDelete)
-    await item.root.hover()
-    await item.deleteButton.click()
+    await todoPage.deleteTodo(toDelete)
 
     // ASSERTIONS
     await expect(item.root).toHaveCount(0)
@@ -55,8 +54,7 @@ test.describe('TodoMVC - Deleting todos', () => {
     const activeBefore = await todoPage.getActiveCount()
 
     const item = todoPage.getTodoItem(toDelete)
-    await item.root.hover()
-    await item.deleteButton.click()
+    await todoPage.deleteTodo(toDelete)
 
     // ASSERTIONS
     const activeAfter = await todoPage.getActiveCount()
@@ -76,9 +74,7 @@ test.describe('TodoMVC - Deleting todos', () => {
     await todoPage.addTodo(toKeepDoing)
 
     // delete the second item, active duplicate
-    const toDelete = todoPage.getTodoItem(toKeepDoing, 1)
-    await toDelete.root.hover()
-    await toDelete.deleteButton.click()
+    await todoPage.deleteTodo(toKeepDoing, 1)
 
     // ASSERTIONS
     const duplicateCount = await todoPage.todoItems

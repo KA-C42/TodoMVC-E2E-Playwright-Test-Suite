@@ -4,7 +4,7 @@ This document details the planned tests and testing structure. The document will
 ### Sanity checks
 [x] **S1:** Renders home page in empty state
 
-[ ] **S2:** List data persists on refresh
+[x] **S2:** List data persists on refresh
 
 ### Adding todos
 [x] **A1:** Add todo from empty state
